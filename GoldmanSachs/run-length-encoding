@@ -1,0 +1,28 @@
+
+class GfG
+ {
+	String encode(String str)
+	{
+          //Your code here
+          char array[] = new char[str.length()];
+          array = str.toCharArray();
+          int count = 1;
+          char prev = array[0];
+          String s = "";
+          for(int i = 1;i < array.length;i++){
+              if(prev!=array[i]){
+                  //System.out.print(prev);
+                  //System.out.print(count);
+                  s = s + prev + count;
+                  count = 1;
+                  prev = array[i];
+              }
+              else{
+                  count++;
+              }
+          }
+          s = s + prev + count;
+          return s;
+	}
+	
+ }
