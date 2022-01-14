@@ -1,0 +1,63 @@
+void serialize(Node *root,vector<int> &A)
+
+{
+
+    if(!root) {
+
+        A.push_back(-1);
+
+        return;
+
+    }
+
+    A.push_back(root->data);
+
+    serialize(root->left,A);
+
+    serialize(root->right,A);
+
+}
+
+ 
+
+int indexx=0;
+
+Node * deSerialize(vector<int> &A)
+
+{
+
+    if(A[indexx]==-1 || indexx>=A.size()){
+
+        indexx+=1;
+
+        indexx%= A.size();
+
+        return NULL;
+
+    } 
+
+   Node *root = newNode(A[indexx]);
+
+    indexx+=1;
+
+      indexx%= A.size();
+
+    root->left = deSerialize(A);
+
+    root->right = deSerialize(A);
+
+return root;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
