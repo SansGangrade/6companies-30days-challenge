@@ -1,0 +1,75 @@
+#include <iostream>
+
+using namespace std;
+
+// Constraint: Comparison of a nut to another nut or a bolt to another bolt is not allowed.
+
+//It means nut can only be compared with bolt and bolt can only be compared with nut to see which one is bigger/smaller.
+
+void solve(char *nut, char *bolt, int n){
+
+	for(int i = 0;i<n;i++){		//O(n^2) approach , we cannot compare bolts and bolts as well as nuts and nuts
+
+		//elese we could have just sorted the two arrays
+
+		char curr_nut = nut[i];
+
+		for(int j = i;j<n;j++){
+
+			if(bolt[j] == curr_nut){
+
+				//swap bolt[i] & bolt[j]
+
+				int temp = bolt[i];
+
+				bolt[i] = bolt[j];
+
+				bolt[j] = temp;
+
+				break;
+
+			}
+
+		}
+
+	}
+
+}
+
+int main() {
+
+	// your code goes here
+
+	int t;
+
+	cin>>t;
+
+	while(t--){
+
+		int n;
+
+		cin>>n;
+
+		char *bolt = new char[n];
+
+		char *nut = new char[n];
+
+		for(int j = 0;j<n;j++)cin>>nut[j];
+
+		for(int i = 0;i<n;i++)cin>>bolt[i];
+
+		solve(nut,bolt,n);
+
+		for(int j = 0;j<n;j++)cout<<nut[j]<<" ";
+
+		cout<<endl;
+
+		for(int i = 0;i<n;i++)cout<<bolt[i]<<" ";
+
+	
+
+	}
+
+	return 0;
+
+}
