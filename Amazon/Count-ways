@@ -1,0 +1,173 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef vector<vector<long long> > matrix;
+
+ 
+
+#define LOOP(i, n) for (int i = 1; i < n; i++)
+
+ 
+
+// Computes A*B
+
+// where A,B are square matrices
+
+matrix mul(matrix A, matrix B, long long MOD = 1000000007)
+
+{
+
+    int K = A.size();
+
+    matrix C(K, vector<long long>(K, 0));
+
+    LOOP(i, K)
+
+        LOOP(j, K)
+
+            LOOP(k, K)
+
+                C[i][j] = (C[i][j] + A[i][k] * B[k][j]) % MOD;
+
+    return C;
+
+}
+
+ 
+
+// Computes A^n
+
+matrix power(matrix A, long long n)
+
+{
+
+    if (n == 1)
+
+        return A;
+
+    if (n % 2 != 0) {
+
+        // n is odd
+
+        // A^n = A * [ A^(n-1) ]
+
+        A = mul(A, power(A, n - 1));
+
+    }
+
+    else {
+
+        // n is even
+
+        // A^n = [ A^(n/2) ] * [ A^(n/2) ]
+
+        A = power(A, n / 2);
+
+        A = mul(A, A);
+
+    }
+
+    return A;
+
+}
+
+ 
+
+long long ways(int n)
+
+{
+
+    vector<long long> F(3);
+
+    F[1] = 1;
+
+    F[2] = 2;
+
+    int K = 2;
+
+    long long MOD = 1000000007;
+
+    // create K*K matrix
+
+    matrix C(K + 1, vector<long long>(K + 1, 0));
+
+    /*
+
+      A matrix with (i+1)th element as 1 and last row
+
+      contains constants
+
+      [
+
+          [0 1 0 0 ... 0]
+
+          [0 0 1 0 ... 0]
+
+          [0 0 0 1 ... 0]
+
+          [. . . . ... .]
+
+          [. . . . ... .]
+
+          [c(k) c(k-1) c(k-2) ... c1]
+
+      ]
+
+    */
+
+    for (int i = 1; i < K; ++i) {
+
+        C[i][i + 1] = 1;
+
+    }
+
+    // Last row is the constants c(k) c(k-1) ... c1
+
+    // f(n) = 1*f(n-1) + 1*f(n-2)
+
+    C[K][1] = 1;
+
+    C[K][2] = 1;
+
+ 
+
+    if (n <= 2)
+
+        return F[n];
+
+ 
+
+    // f(n) = C^(n-1)*F
+
+    C = power(C, n - 1);
+
+ 
+
+    long long result = 0;
+
+ 
+
+    // result will be the first row of C^(n-1)*F
+
+    for (int i = 1; i <= K; ++i) {
+
+        result = (result + C[1][i] * F[i]) % MOD;
+
+    }
+
+    return result;
+
+}
+
+ 
+
+int main()
+
+{
+
+    int n = 4;
+
+    cout << "Number of ways = " << ways(n) << endl;
+
+}
