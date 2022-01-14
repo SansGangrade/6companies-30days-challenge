@@ -1,0 +1,57 @@
+int isValid(vector<vector<int>> board){ 
+
+        unordered_set<string>s; 
+
+        for(int i=0;i<9;i++) 
+
+        { 
+
+            for(int j=0;j<9;j++) 
+
+            { 
+
+                if(mat[i][j]!=0) 
+
+                { 
+
+                    string s1="row"+to_string(i)+to_string(mat[i][j]); 
+
+                    string s2="col"+to_string(j)+to_string(mat[i][j]); 
+
+                    string s3="box"+to_string((i/3*3)+(j/3))+to_string(mat[i][j]); 
+
+                    if((s.find(s1)!=s.end())||(s.find(s2)!=s.end())||(s.find(s3)!=s.end())) 
+
+                    { 
+
+                        return false; 
+
+                    } 
+
+                    else 
+
+                    { 
+
+                    s.insert(s1); 
+
+                    s.insert(s2); 
+
+                    s.insert(s3); 
+
+                    } 
+
+                     
+
+                } 
+
+            } 
+
+             
+
+        } 
+
+        return true; 
+
+       
+
+    }
