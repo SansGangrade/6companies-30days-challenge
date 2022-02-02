@@ -1,3 +1,6 @@
+#User function Template for python3
+
+'''
 # Node Class:
 class Node:
     def __init__(self,val):
@@ -109,3 +112,4 @@ if __name__=="__main__":
         ob.toSumTree(root)
         printInorder(root)
         print()
+# } Driver Code Ends
