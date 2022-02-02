@@ -1,3 +1,6 @@
+#User function Template for python3
+
+   
 class Solution:
     #Function to find total number of unique paths.
     def NumberOfPaths(self,a, b):
@@ -21,3 +24,5 @@ if __name__ == '__main__':
         b = a_b[1]
         ob = Solution()
         print(ob.NumberOfPaths(a, b))
+
+# } Driver Code Ends
